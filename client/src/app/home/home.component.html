@@ -1,0 +1,24 @@
+<div class="container">
+    <div *ngIf="!registerMode" style="text-align: center;">
+
+        <div class="justify-content-center">
+            <h3>Eat.</h3>
+            <h3>Sleep.</h3>
+            <h1><span class="bg-red">Date.</span></h1>
+            <h3>Repeat.</h3>
+        </div>
+        
+        <p>Come on sign up!</p>
+        <div class="text-center">
+            <button (click)="registerToggle()" class="btn btn-primary btn-lg me-2">Sign Up</button>
+            <button class="btn btn-primary btn-info btn-lg">Learn more</button>
+        </div>
+    </div>
+    <div *ngIf="registerMode" class="container">
+        <div class="row justify-content-center">
+            <div class="col-4">
+               <app-register [userListFromHomeComponent]="users" (cancelRegister)="cancelRegisterMode($event)"></app-register>
+            </div>
+        </div>
+    </div>
+</div>

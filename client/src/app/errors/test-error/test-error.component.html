@@ -1,0 +1,42 @@
+<ng-container>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Test Error</h1>
+                <p>This is a test error page</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mt-3">
+                <button class="btn btn-primary" (click)="get500Error()">Test 500 Error</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mt-3">
+                <button class="btn btn-primary" (click)="get404Error()">Test 404 Error</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mt-3">
+                <button class="btn btn-primary" (click)="get401Error()">Test 401 Error</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mt-3">
+                <button class="btn btn-primary" (click)="get400Error()">Test 400 Error</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mt-3">
+                <button class="btn btn-primary" (click)="get400ValidationError()">Test 400 Validation Error</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mt-3">
+               <ul class="text-danger">
+                <li  *ngFor="let error of validationErrors">{{error}}</li>
+               </ul>
+            </div>
+        </div>
+    </div>
+</ng-container>

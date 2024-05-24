@@ -34,7 +34,8 @@ export class NavComponent implements OnInit{
     next: _ => this.router.navigateByUrl('/members'),
     error:errorObj => {
       console.log(errorObj);
-       this.toaster.error(errorObj.error)},
+      // this.toaster.error(errorObj.error) this is been handling by the error interceptor
+      },
     complete:() => console.log('Request has completed')
     }
   )

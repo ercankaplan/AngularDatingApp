@@ -13,6 +13,11 @@ public class DataContext : DbContext
     }
 
     public DbSet<AppUser> Users { get; set; }
+
+    //It is not added this DbSet because it isn't going to be used on its own in the application
+    //public DbSet<Photo> Photos { get; set; }
+
+
 }
 
 

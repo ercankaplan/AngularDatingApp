@@ -21,6 +21,22 @@ public class UsersController(IUserRepository userRepository, IMapper mapper) : B
     public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers() //api/users
     {
         
+       
+        var users = await _userRepository.GetUsersAsync();
+
+        if (!users.Any())
+            return NotFound();
+
+        var members = _mapper.Map<IEnumerable<MemberDto>>(users);
+
+        return Ok(members);
+    }
+
+     [HttpGet]
+     [Route("/api/members")]
+    public async Task<ActionResult<IEnumerable<MemberDto>>> Members() //api/users
+    {
+        
         var members = await _userRepository.GetMembersAsync();
 
         if (!members.Any())
@@ -41,7 +57,8 @@ public class UsersController(IUserRepository userRepository, IMapper mapper) : B
     }
 
 
-    [HttpGet("{username}")]
+
+    [HttpGet("/api/members/{username}")]
     public async Task<ActionResult<MemberDto>> GetUser(string username) //api/users/ecco
     {
 

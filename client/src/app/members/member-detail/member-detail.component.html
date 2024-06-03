@@ -1,7 +1,7 @@
 <div class="row" *ngIf="member">
     <div class="col-4">
         <div class="card">
-            <img src="{{member.photoUrl || './assets/user.png'}}" alt="Photo of {{member.knownAs}}"
+            <img src="{{member.photoUrl ||'./assets/user.png'}}" alt="Photo of {{member.knownAs}}"
                 class="card-img-top img-thumbnail">
 
             <div class="card-body">
@@ -24,8 +24,8 @@
             </div>
             <div class="card-footer">
                 <div class="btn-group d-flex">
-                    <button class="btn btn-primary">Like</button>
-                    <button class="btn btn-success">Message</button>
+                    <button class="btn btn-primary" style="background-color: #c806b2!important;" >Like</button>
+                    <button class="btn btn-success" style="background-color: #e26255!important;">Message</button>
                 </div>
             </div>
         </div>
@@ -42,8 +42,8 @@
             <h4>Interests</h4>
             <p>{{member.interests}}</p>
           </tab>
-          <tab heading="Photos">
-            <p>Photos will go here</p>
+          <tab heading="Photos" #photoTab="tab">
+            <gallery [items]="images" *ngIf="photoTab.active" class="gallery"></gallery>
           </tab>
           <tab heading="Messages">
             <p>Messages will go here</p>

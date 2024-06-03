@@ -14,3 +14,10 @@ height: 85%;
     background-color: #fff;
     border-top:none;
 }
+.gallery
+{
+    height: 650px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

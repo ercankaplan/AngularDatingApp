@@ -4,7 +4,7 @@ import { inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
 
-export const AuthGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = (route, state) => {
 
 
   const accountService = inject(AccountService);

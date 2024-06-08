@@ -1,4 +1,5 @@
-﻿using API.Data;
+﻿using System.Security.Claims;
+using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Repositories;
@@ -91,6 +92,27 @@ public class UsersController(IUserRepository userRepository, IMapper mapper) : B
         var member = _mapper.Map<MemberDto>(user);
 
         return Ok(member);
+    }
+
+    [HttpPut]
+    public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+    {
+        //var userName = this.HttpContext.User.Identity.Name;
+        var userName = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var user = await _userRepository.GetUserByUsernameAsync(userName);
+
+        if(user == null)
+            return NotFound();
+
+        _mapper.Map(memberUpdateDto, user);
+        
+        _userRepository.Update(user);
+
+        if (await _userRepository.SaveAllAsync())
+            return NoContent();//200 empty response
+
+        return BadRequest("Failed to update user");
+       
     }
 
 }

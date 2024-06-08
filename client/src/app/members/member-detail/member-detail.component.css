@@ -21,3 +21,7 @@ height: 85%;
     flex-wrap: wrap;
     justify-content: center;
 }
+.ngx-gallery {
+    display: inline-block;
+    margin-bottom: 20px;
+}

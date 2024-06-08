@@ -24,6 +24,11 @@ export class MembersService implements OnInit {
     return this.http.get<Member>(this.baseUrl + 'members/' + username);
   }
 
+  updateMember(member: Member) {
+
+    return this.http.put(this.baseUrl + 'users', member)
+  }
+
 
   /*
   getMembers() {

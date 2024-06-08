@@ -47,4 +47,9 @@ export class NavComponent implements OnInit{
     this.router.navigateByUrl('/');
   }
 
+  edit()
+  {
+    this.router.navigateByUrl('/member/edit');
+  }
+
 }

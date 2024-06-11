@@ -7,16 +7,14 @@ import { map, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class MembersService implements OnInit {
+export class MembersService {
 
   baseUrl = environment.apiUrl;
   
   members: Member[] = [];
   constructor(private http: HttpClient) { }
 
-  ngOnInit(): void {
-
-  }
+ 
 
   getMembers() {
 
@@ -56,6 +54,13 @@ export class MembersService implements OnInit {
         )
   }
 
+  setMainPhoto(photoId: number) {
+    return this.http.put(this.baseUrl + 'users/set-main-photo/' + photoId, {});
+  }
+
+  deletePhoto(photoId: number) {
+    return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
+  }
 
   /*
   getMembers() {

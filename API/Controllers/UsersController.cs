@@ -1,7 +1,10 @@
 ﻿using System.Security.Claims;
+using System.Text.Json;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
+using API.Helpers;
 using API.Repositories;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -36,6 +39,23 @@ public class UsersController(IUserRepository userRepository, IPhotoService photo
 
     [HttpGet]
     [Route("/api/members")]
+    public async Task<ActionResult<PagedList<MemberDto>>> Members([FromQuery]UserParams userParams) //api/users
+    {
+
+ 
+        var pagedMemberList = await _userRepository.GetMembersAsync(userParams);
+        PaginationHeader paginationHeader = new PaginationHeader(pagedMemberList.CurrentPage, pagedMemberList.PageSize, pagedMemberList.TotalCount, pagedMemberList.TotalPages);
+
+        Response.AddPaginationHeader(paginationHeader);
+
+        return Ok(pagedMemberList);
+
+      
+    }
+
+    /*
+    [HttpGet]
+    [Route("/api/members")]
     public async Task<ActionResult<IEnumerable<MemberDto>>> Members() //api/users
     {
 
@@ -46,17 +66,20 @@ public class UsersController(IUserRepository userRepository, IPhotoService photo
 
         return Ok(members);
 
-        /*
-        var users = await _userRepository.GetUsersAsync();
+        
+        //var users = await _userRepository.GetUsersAsync();
 
-        if (!users.Any())
-            return NotFound();
+        //if (!users.Any())
+        //    return NotFound();
 
-        var members = _mapper.Map<IEnumerable<MemberDto>>(users);
+        //var members = _mapper.Map<IEnumerable<MemberDto>>(users);
 
-        return Ok(members);
-        */
+        //return Ok(members);
+        
     }
+
+    */
+
 
 
 

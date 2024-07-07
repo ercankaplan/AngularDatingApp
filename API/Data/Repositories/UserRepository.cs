@@ -1,6 +1,7 @@
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.Repositories;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -48,8 +49,21 @@ public class UserRepository : IUserRepository
             .Include(p => p.Photos)
             .FirstOrDefaultAsync(u => u.UserName == username);
     }
+public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
+    {
+        var query =  _context.Users
+            .Include(p => p.Photos)
+            .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+            .AsNoTracking();
 
-    public async Task<IEnumerable<MemberDto>> GetMembersAsync()
+            //.Skip((userParams.PageNumber - 1) * userParams.PageSize)
+            //.Take(userParams.PageSize)
+            //.ToListAsync();
+
+            return await PagedList<MemberDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
+    }
+
+    public async Task<IEnumerable<MemberDto>> GetMembersAsyncV1()
     {
         return await _context.Users
             .Include(p => p.Photos)
